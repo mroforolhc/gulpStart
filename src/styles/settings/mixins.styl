@@ -1,0 +1,127 @@
+$IMG-PATH = '../img/'
+$FONT-PATH = '../fonts/'
+
+mx-sqrt($x)
+    return math($x, 'sqrt')
+
+// Крестик
+mx-cross($color, $thick, $w, $h = $w)
+    height: $h
+    width: $w
+    &::before, &::after
+        transform-origin: top
+        position: absolute
+        content: ''
+        top: 0
+        height: mx-sqrt($w*$w + $h*$h) - 2px
+        width: $thick
+        background-color: $color
+
+    &::before
+        right: 0
+        transform: rotate(45deg)
+    &::after
+        left: 0
+        transform: rotate(-45deg)
+
+padding-x($left, $right = $left)
+    padding-left: $left
+    padding-right: $right
+
+padding-y($top, $bottom = $top)
+    padding-top: $top
+    padding-bottom: $bottom
+
+margin-x($left, $right = $left)
+    margin-left: $left
+    margin-right: $right
+
+margin-y($top, $bottom = $top)
+    margin-top: $top
+    margin-bottom: $bottom
+
+size($width, $height = $width)
+    width: $width
+    height: $height
+
+img-url($file)
+    url($IMG-PATH + $file)
+
+font-url($font) // $font = folder + name, example: ComicSans/Comicsans.ttf
+    url($FONT-PATH + $font)
+
+mx-font-face($name, $path, $weight = false, $style = false)
+    @font-face
+        font-family: $name
+        if $path == 'local'
+            src: local($name)
+        else
+            src: font-url($path + '.woff2') format('woff2'), font-url($path + '.woff') format('woff')
+        font-weight: $weight if $weight
+        font-style: $style if $style
+
+divide($list, $value)
+    $list1 = clone($list)
+    for v, i in $list
+        if $list[i] != n
+            $list1[i] = $list[i] / $value
+        else
+            $list1[i] = n
+    return $list1
+
+neg($list)
+    $list1 = clone($list)
+    for v, i in $list
+        if $list[i] != n
+            $list1[i] = -($list[i])
+        else
+            $list1[i] = n
+    return $list1
+
+set($prop, $list1, $startFrom = 0)
+    $list = $list1
+    if length($list) <= length($scale-names)
+        if $list[$startFrom] == n
+            $last = 0
+            for v, i in $list
+                if i < $startFrom && v != n
+                    $last = v
+            $list[$startFrom] = $last
+        for v, i in $list
+            if v != n && i >= $startFrom
+                if i == 0
+                    {$prop}: v;
+                else
+                    +above($scale-names[i])
+                        {$prop}: v;
+
+// ------- Sprite mixins ---------- //
+sprite-scale($sprite, $w...)
+    spriteImage($sprite)
+    if $w[0] != n
+        $scale = $w[0] / $sprite[4]
+        background-size $scale*$sprite[6]
+        background-position $sprite[2] *$scale $sprite[3] *$scale
+        width $w[0]
+        height $sprite[5] * $scale
+    if length($w) > 1
+        for i in (1..length($w) - 1)
+            if $w[i] != n
+                +above($scale-names[i])
+                    sprite-rescale $sprite $w[i]
+
+
+sprite-rescale($sprite, $w = full)
+    if $w != full
+        $scale = $w / $sprite[4]
+        background-size $scale*$sprite[6]
+        background-position $sprite[2] *$scale $sprite[3] *$scale
+        width $w
+        height $sprite[5] * $scale
+    else
+        spritePosition($sprite)
+        spriteWidth($sprite)
+        spriteHeight($sprite)
+        background-size $sprite[6]
+
+// ----------------------------------- //

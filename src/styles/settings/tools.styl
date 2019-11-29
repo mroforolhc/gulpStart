@@ -1,0 +1,68 @@
+@import "rupture.styl"
+@import "mixins.styl"
+
+_fonts = {
+    body: {
+        name: 'Open Sans',
+    },
+    rouble: {
+        name: 'PT Rouble Sans',
+        options: ({
+            path: 'PTRoubleSans/PTRoubleSans',
+            weight: 400,
+            style: normal
+        })
+    },
+    solomon: {
+        name: 'Solomon Sans',
+        options: ({
+            path: 'SolomonSans/SolomonSansLight',
+            weight: 300,
+            style: normal,
+        })({
+            path: 'SolomonSans/SolomonSansNormal',
+            weight: 400,
+            style: normal,
+        })({
+            path: 'SolomonSans/SolomonSansBlack',
+            weight: 900,
+            style: normal
+        })
+    }
+}
+
+_font-size = {
+    body: 14px n n n 16px n,
+    h1:   23px 40px n n 58px n,
+    h2:   16px n n n 18px n
+}
+
+_color = {
+    font: {
+        base: #000,
+        yellow: #E5A500,
+        grey: #9D9D9D,
+
+        button: {
+            default: #fff,
+            disabled: #E4E4E4
+        },
+
+        link: {
+            default: #5DA1C0,
+            active: darken(#5DA1C0, 40%),
+            hover: lighten(#5DA1C0, 30%),
+            disabled: #CCCCCC
+        }
+    },
+
+    bg: {
+        base: #F8F8F8,
+        button: {
+            default: linear-gradient(133.35deg, #8CDAFD 0.42%, #58AFD7 58.29%),
+            hover: #58AFD7,
+            active: #58AFD7,
+            disabled: #CCCCCC,
+        }
+    }
+}

@@ -1,0 +1,91 @@
+.overlay
+    visibility hidden
+    position fixed
+    top 0
+    left 0
+    right 0
+    bottom 0
+    z-index 1000
+    background-color rgba(0,0,0,0.35)
+    overflow: hidden
+    &_modal
+        text-align center
+        white-space nowrap
+        z-index 3000
+
+.modal
+    visibility hidden
+    width 100%
+    max-height 100%
+    overflow-y auto
+    max-width 672px
+    background-color white
+    margin auto
+    position relative
+    cursor default
+    vertical-align middle
+    white-space normal
+    text-align left
+    box-shadow 0 0 20px rgba(#000, 0.5)
+    transform translateY(-200%)
+    transition all .5s
+    opacity 0
+    &__close
+        z-index 100
+        mx-cross #E5E5E5, 2px, 15px
+        position absolute
+        right 20px
+        top 20px
+        cursor pointer
+        +above(sm)
+            mx-cross #E5E5E5, 2px, 34px
+    &__container
+        padding 20px 30px
+        +above(sm)
+            padding 50px
+
+.modal-show.overlay
+    visibility visible
+    .modal
+        transform translateY(0%)
+        opacity 1
+        visibility visible
+
+.modal-form
+    &__title
+        font-size 30px
+        line-height normal
+        margin-bottom 20px
+        +above(sm)
+            font-size 48px
+            margin-bottom 40px
+    &__row
+        margin-top 20px
+    &__label
+        font-weight 600
+        font-size 16px
+        +above(sm)
+            font-size 24px
+    &__text
+        font-size 18px
+        color #868686
+    &__input
+        width 100%
+        border 1px solid #E5E5E5
+        font-size 16px
+        padding 15px
+        margin-y 10px 20px
+        border-radius 52px
+        &:focus, &:active
+            border 1px solid #3D96E8
+            outline none
+    &__button
+        padding-y 18px
+        margin-y 20px 10px
+        width 100%
+        border-radius 65px
+        +above(sm)
+            max-width 188px
+
+body.modal-open
+    overflow hidden

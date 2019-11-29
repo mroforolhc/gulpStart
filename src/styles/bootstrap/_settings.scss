@@ -1,0 +1,26 @@
+
+$grid-columns: 12;
+
+$grid-gutter-widths: (
+    xs: 30px,
+    xl: 40px,
+    ml: 50px,
+);
+
+$grid-gutter-width: map-get($grid-gutter-widths, xs);
+
+$grid-breakpoints: (
+    xs: 0,
+    sm: 640px,
+    md: 960px,
+    lg: 1280px,
+    xl: 1600px,
+    ml: 1920px
+);
+$container-max-widths: (
+    sm: 610px,
+    md: 900px,
+    lg: 1220px,
+    xl: 1540px,
+    ml: 1840px
+);

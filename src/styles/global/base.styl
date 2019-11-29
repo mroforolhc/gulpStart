@@ -1,0 +1,240 @@
+for key, font in _fonts
+    _name = font[name]
+
+    if options in font
+        if path in font[options]  // if length options = 1
+            mx-font-face(_name, font[options].path, font[options].weight, font[options].style)
+        else
+            for option in font[options]
+                mx-font-face(_name, option.path, option.weight, option.style)
+
+*
+    box-sizing border-box
+
+html, body
+    position relative
+    width 100%
+    padding 0
+    margin 0 auto
+    min-width 320px
+    max-width 1920px
+
+body
+    background-color: _color.bg.base
+    color: _color.font.base
+    font-family sans-serif
+    set('font-size', _font-size.body)
+    font-weight 300
+    line-height normal
+
+.fonts-loaded
+    body, h1, h2, h3, h4, h5, h6
+        font-family: _fonts.body.name
+    .rouble
+        font-family: _fonts.rouble.name
+
+p, ul, ol, table
+    margin 1em 0
+    padding 0
+
+ol, ul
+    margin-left 20px
+li
+    margin 0
+
+h1, h2, h3, h4, h5, h6, .title,
+.h1, .h2, .h3, .h4, .h5, .h6
+    font-weight 600
+    font-family sans-serif
+    margin 0
+
+h1, .h1
+    set('font-size', _font-size.h1)
+h2, .h2
+    set('font-size', _font-size.h2)
+
+img
+    width 100%
+.img-responsive
+    display block
+    width auto!important
+    max-width 100%
+
+a
+    cursor pointer
+    text-decoration none
+    color: _color.font.link.default
+
+input,
+textarea
+    padding 9px 15px
+    border 1px solid #B1B1B1
+    width 100%
+    +above(lg)
+        padding 15px
+        max-width 571px
+        display block
+
+textarea
+    height 100px
+
+button
+    border none
+    outline none
+    background-color transparent
+    cursor pointer
+
+.button
+    background _color.bg.button.default
+    text-transform uppercase
+    letter-spacing: 0.095em
+    font-weight 900
+    display inline-block
+    color _color.font.button.default
+    box-shadow 0 4px 11px rgba(0, 0, 0, 0.36)
+    transition box-shadow .3s
+    text-align center
+    padding 15px 30px
+    line-height normal
+    &:hover
+        color _color.font.button.default
+        background _color.bg.button.hover
+    &:active
+        color _color.font.button.default
+        background _color.bg.button.active
+        box-shadow none
+
+
+.button[disabled]
+    background _color.bg.button.disabled
+    cursor default
+    box-shadow none
+
+.checkbox
+    position absolute
+    top 0
+    left 0
+    size 20px
+    border 1px solid #CFCFCF
+    &:after
+        content ''
+        position absolute
+        display none
+    &_label
+        padding-left 30px
+        position relative
+        cursor pointer
+        user-select none
+        input
+            position absolute
+            opacity 0
+            cursor pointer
+            width 0!important
+            height 0!important
+        .checkbox:after
+            top 0
+            bottom 0
+            left 0
+            right 0
+            margin auto
+            background-image img-url('design/checkmark.svg')
+            size 14px 11px
+        input:checked ~ .checkbox
+            background linear-gradient(101.24deg, #8CDAFD 0.42%, #58AFD7 58.29%);
+        input:checked ~ .checkbox:after
+            display block
+
+.radio
+    position absolute
+    top 0
+    left 0
+    size 20px
+    border-radius 50%
+    border 1px solid #CFCFCF
+    &:after
+        content ''
+        position absolute
+        display none
+    &_label
+        padding-left 30px
+        position relative
+        cursor pointer
+        user-select none
+        input
+            position absolute
+            opacity 0
+            cursor pointer
+            width 0!important
+            height 0!important
+        .radio:after
+            top 0
+            bottom 0
+            left 0
+            right 0
+            margin auto
+            background linear-gradient(101.24deg, #8CDAFD 0.42%, #58AFD7 58.29%)
+            size 12px
+            border-radius 50%
+        input:checked ~ .radio:after
+            display block
+
+.link
+    font-weight 300
+    cursor pointer
+    color: _color.font.link.default
+    &:hover
+        color: _color.font.link.hover
+    &:active
+        color: _color.font.link.active
+    &_black
+        color black
+        &:active
+            color black
+.reverse
+    transform rotate(180deg)
+
+.breadcrumb
+    font-weight 900
+    font-size 10px
+    text-transform uppercase
+    letter-spacing 0.095em
+    +above(xl)
+        font-size 12px
+    &__list
+        list-style-type none
+        margin 0
+    &__item
+        display inline
+    &__slash
+        padding-left 4px
+        color #5DA1C0
+    &__span
+        color #5DA1C0
+    &__link
+        color #BAF5E0
+
+.swiper
+    &-container
+        overflow hidden
+        position relative
+    &-wrapper
+        display flex
+    &-slide
+        flex none
+
+.content-block
+    strong
+        font-weight 600
+    ul
+        list-style-type none
+        li
+            position relative
+            margin 0.5em 0
+            &:before
+                content ''
+                border-radius 50%
+                position absolute
+                top 7px
+                left -18px
+                size 10px
+                background-color white
