@@ -4,7 +4,7 @@ const $ = require('gulp-load-plugins')();
 const gulplog = require('gulplog');
 const named = require('vinyl-named');
 
-const { webpack } = webpackStream;
+// const { webpack } = webpackStream;
 
 const { path } = require('../gulpOptions');
 const isProduction = require('../gulpOptions').PRODUCTION;
@@ -56,11 +56,9 @@ module.exports = (callback) => {
 
     function done(err, stats) {
         firstBuild = true;
-
         if (err) {
             return;
         }
-
         gulplog[stats.hasErrors() ? 'error' : 'info'](stats.toString({
             colors: true,
         }));

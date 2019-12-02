@@ -1,6 +1,4 @@
 const gulp = require('gulp');
-const isDeploy = require('./gulpOptions').DEPLOY;
-
 
 function lazyRequireTask(taskName, path) {
     gulp.task(taskName, (callback) => {
@@ -25,20 +23,12 @@ lazyRequireTask('deploy', './tasks/deploy');
 lazyRequireTask('webserver', './tasks/webserver');
 lazyRequireTask('watcher', './tasks/watcher');
 
-if (isDeploy) {
-    gulp.task('build', gulp.series(
-        'clean',
-        gulp.parallel('sprites:png', 'sprites:svg', 'images', 'fonts'),
-        gulp.parallel('styles', 'html'),
-        'deploy',
-    ));
-} else {
-    gulp.task('build', gulp.series(
-        'clean',
-        gulp.parallel('sprites:png', 'sprites:svg', 'images', 'fonts'),
-        gulp.parallel('styles', 'html'),
-    ));
-}
+
+gulp.task('build', gulp.series(
+    'clean',
+    gulp.parallel('sprites:png', 'sprites:svg', 'images', 'fonts'),
+    gulp.parallel('styles', 'html'),
+));
 
 gulp.task('dev', gulp.parallel('webserver', 'watcher'));
 gulp.task('default', gulp.series('build', 'dev'));

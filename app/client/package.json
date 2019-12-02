@@ -12,10 +12,9 @@
     "start": "gulp",
     "deploy": "gulp deploy",
     "build": "gulp build",
-    "build:deploy": "gulp build --deploy",
     "prod": "cross-env NODE_ENV=production gulp build",
-    "prod:deploy": "cross-env NODE_ENV=production gulp build --deploy",
-    "time:gulp": "powershell Measure-Command { gulp build }"
+    "prod:deploy": "cross-env NODE_ENV=production gulp --series build deploy",
+    "time:build": "powershell Measure-Command { gulp build }"
   },
   "dependencies": {
     "@babel/core": "7.0.0",
@@ -61,6 +60,7 @@
     "normalize.css": "^8.0.1",
     "nouislider": "^14.0.3",
     "rupture": "^0.7.1",
+    "static-eval": "^2.0.3",
     "svg4everybody": "^2.1.9",
     "swiper": "^5.2.1",
     "vanilla-lazyload": "^12.4.0",

@@ -3,7 +3,6 @@
 //
 
 module.exports.PRODUCTION = process.env.NODE_ENV === 'production';
-module.exports.DEPLOY = process.argv.includes('--deploy');
 
 module.exports.browserSyncConfig = {
     server: {
@@ -19,7 +18,7 @@ module.exports.browserSyncConfig = {
 module.exports.path = {
     deploy: {
         src: 'dist/assets/**/*.*',
-        dist: 'public/',
+        dist: '../../public/',
     },
 
     dist: {
