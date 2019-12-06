@@ -23,7 +23,6 @@ lazyRequireTask('deploy', './tasks/deploy');
 lazyRequireTask('webserver', './tasks/webserver');
 lazyRequireTask('watcher', './tasks/watcher');
 
-
 gulp.task('build', gulp.series(
     'clean',
     gulp.parallel('sprites:png', 'sprites:svg', 'images', 'fonts'),
