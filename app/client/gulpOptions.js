@@ -11,6 +11,8 @@ module.exports.browserSyncConfig = {
 
     // tunnel: true,
     open: false,
+    injectChanges: false,
+    logFileChanges: false,
     host: 'localhost',
     port: 3000,
 };
@@ -27,7 +29,7 @@ module.exports.path = {
         css: 'dist/assets/css/',
         img: 'dist/assets/',
         fonts: 'dist/assets/fonts/',
-        bootstrap: 'src/assets/styles/css/',
+        bootstrap: 'src/styles/css/',
         sprites: 'dist/assets/images/sprites/',
     },
 
@@ -46,8 +48,8 @@ module.exports.path = {
     },
 
     watch: {
-        pug: 'src/pug/**/*.*',
-        styles: 'src/styles/**/*.{styl,css}',
+        pug: ['src/pug/**/*.*', 'src/blocks/**/*.pug'],
+        styles: ['src/styles/**/*.{styl,css}', 'src/blocks/**/*.styl'],
         img: ['src/images/**/*.*', 'src/uploads/**/*.*'],
         fonts: 'src/fonts/**/*.*',
         sprites: {

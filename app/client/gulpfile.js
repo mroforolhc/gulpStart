@@ -26,7 +26,7 @@ lazyRequireTask('watcher', './tasks/watcher');
 gulp.task('build', gulp.series(
     'clean',
     gulp.parallel('sprites:png', 'sprites:svg', 'images', 'fonts'),
-    gulp.parallel('styles', 'html'),
+    gulp.parallel('styles', 'html', 'webpack'),
 ));
 
 gulp.task('dev', gulp.parallel('webserver', 'watcher'));
