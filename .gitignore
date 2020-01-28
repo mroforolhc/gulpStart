@@ -1,1 +1,7 @@
+.vscode
 .idea
+.env
+node_modules
+dist
+src/styles/sprites
+stats.json
