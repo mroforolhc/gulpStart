@@ -1,0 +1,33 @@
+doctype html
+html(lang="ru")
+    head
+        block head
+            meta(charset="UTF-8")
+            meta(name="viewport" content="width=device-width, height=device-height")
+            title #{title}
+            link(rel="preload" as="style" href="assets/css/global.css?v=" + Math.floor(Math.random() * (1000 - 9999) + 9999) onload="this.rel='stylesheet'")
+
+    body
+        block header
+            include ../blocks/_global/header/header
+
+        block content
+            p nothing
+
+        block footer
+            include ../blocks/_global/footer/footer
+
+        block scripts
+            .overlay.overlay_modal
+                .modal
+                    .modal__close(data-modal-close)
+                    .modal__container
+
+            include ../blocks/_global/toolbar/toolbar
+
+            script(src="assets/js/polyfills.js")
+            script(crossorigin="anonymous" src="https://polyfill.io/v3/polyfill.min.js?features=default,fetch")
+
+            script(src="assets/js/vendors~global.js")
+            script(src="assets/js/global.js")
+

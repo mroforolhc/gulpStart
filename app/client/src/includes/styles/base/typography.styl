@@ -1,0 +1,25 @@
+for key, font in _fonts
+    _name = font[name]
+
+    if options in font
+        if path in font[options]  // if length options = 1
+            mx-font-face(_name, font[options].path, font[options].weight, font[options].style)
+        else
+            for option in font[options]
+                mx-font-face(_name, option.path, option.weight, option.style)
+
+.fonts-loaded
+    body
+        font-family: _fonts.body.name
+    .rouble
+        font-family: _fonts.rouble.name
+    h1, h2, h3, h4, h5, h6,
+    .h1, .h2, .h3, .h4, .h5, .h6
+        font-family: _fonts.header.name
+
+.h1
+    set('font-size', _font-size.h1)
+.h2
+    set('font-size', _font-size.h2)
+.h3, .h4, .h5, .h6
+    set('font-size', _font-size.other-headers)

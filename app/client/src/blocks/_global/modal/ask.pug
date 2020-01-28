@@ -1,0 +1,15 @@
+form.modal__form.form(method="post")
+    .form__container
+        .form__title Задать вопрос
+        .form__row
+            label.form__label ФИО:
+                input.form__input(name="name" required)
+        .form__row
+            label.form__label Телефон:
+                input.form__input(name="phone" required)
+        .form__row
+            label.form__label Ваш вопрос:
+                textarea.form__input(name="question" rows="20" required)
+        button.form__button(type="submit") Отправить
+
+

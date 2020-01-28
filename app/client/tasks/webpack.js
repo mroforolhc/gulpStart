@@ -3,11 +3,18 @@ const { src, dest } = require('gulp');
 const $ = require('gulp-load-plugins')();
 const gulplog = require('gulplog');
 const named = require('vinyl-named');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 // const { webpack } = webpackStream;
 
-const { path } = require('../gulpOptions');
-const isProduction = require('../gulpOptions').PRODUCTION;
+const {
+    path,
+    isProduction,
+    isWatch,
+    isDeploy,
+} = require('../gulp_options');
+
+const distPath = isDeploy ? path.deploy.js : path.dist.js;
 
 const options = {
     output: {
@@ -15,7 +22,7 @@ const options = {
         publicPath: '/assets/js/',
     },
     mode: isProduction ? 'production' : 'development',
-    watch: !isProduction,
+    watch: isWatch,
     module: {
         rules: [{
             loader: 'babel-loader',
@@ -33,9 +40,16 @@ const options = {
                 ],
                 plugins: ['@babel/plugin-proposal-class-properties'],
             },
-            exclude: /node_modules/,
+            exclude: /node_modules(?!([\\/])(swiper|dom7))/,
         }],
     },
+    plugins: !isWatch ? [
+        new BundleAnalyzerPlugin({
+            generateStatsFile: true,
+            openAnalyzer: false,
+            analyzerMode: 'disabled',
+        }),
+    ] : [],
     optimization: {
         splitChunks: {
             chunks: 'all',
@@ -73,7 +87,7 @@ module.exports = (callback) => {
         }))
         .pipe(named())
         .pipe(webpackStream(options, null, done))
-        .pipe(dest(path.dist.js))
+        .pipe(dest(distPath))
         .on('data', () => {
             if (firstBuild) {
                 callback();

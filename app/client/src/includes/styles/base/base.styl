@@ -1,0 +1,41 @@
+*
+    box-sizing border-box
+
+html, body
+    position relative
+    size 100%
+    padding 0
+    margin 0 auto
+    min-width 320px
+    max-width 1920px
+
+body
+    display flex
+    flex-direction column
+    justify-content space-between
+
+    background-color: _color.bg.base
+    color: _color.font.base
+    font-family sans-serif
+    set('font-size', _font-size.body)
+
+main
+    flex-grow 1
+
+p, ul, ol, table
+    margin 1em 0
+    padding 0
+
+ol, ul
+    margin-left 20px
+
+img
+    width 100%
+
+.img-responsive
+    display block
+    width auto!important
+    max-width 100%
+
+.reverse
+    transform rotate(180deg)

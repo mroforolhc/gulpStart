@@ -1,0 +1,56 @@
+// scroll-lock
+body.modal-open
+    overflow hidden
+
+.overlay
+    visibility hidden
+    position fixed
+    top 0
+    left 0
+    right 0
+    bottom 0
+    z-index 1000
+    background-color rgba(0, 0, 0, 0.35)
+    overflow hidden
+    &_modal
+        text-align center
+        white-space nowrap
+        z-index 3000
+
+.modal
+    visibility hidden
+    width 100%
+    max-height 100%
+    overflow-y auto
+    max-width 672px
+    background-color #F7F7F7
+    margin auto
+    position relative
+    cursor default
+    vertical-align middle
+    white-space normal
+    text-align left
+    box-shadow 0 0 20px rgba(#000, 0.5)
+    transform translateY(-200%)
+    transition all .5s
+    opacity 0
+    &__close
+        z-index 100
+        mx-cross #E5E5E5, 2px, 15px
+        right 20px
+        top 20px
+        cursor pointer
+        +above(sm)
+            mx-cross #E5E5E5, 2px, 34px
+    &__container
+        padding 20px 30px 50px
+        +above(sm)
+            padding 80px 50px 100px
+
+// animation
+.modal-show.overlay
+    visibility visible
+    .modal
+        transform translateY(0%)
+        opacity 1
+        visibility visible

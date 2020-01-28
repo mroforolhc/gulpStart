@@ -1,0 +1,56 @@
+@import "rupture.styl"
+@import "mixins.styl"
+
+_fonts = {
+    body: {
+        name: 'Open Sans',
+    },
+    rouble: {
+        name: 'PT Rouble Sans',
+        options: ({
+            path: 'PTRoubleSans/PTRoubleSans',
+            weight: 400,
+            style: normal
+        })
+    },
+    header: {
+        name: 'Open Sans',
+    },
+}
+
+_font-size = {
+    body: 14px n n n 16px n,
+    h1: 23px 47px n n 62px n,
+    h2: 21px 30px n n 46px n,
+    other-headers: 16px n n n 18px n,
+}
+
+_color = {
+    font: {
+        base: #303030,
+
+        button: {
+            default: #fff,
+            disabled: #D6D6D6,
+            active: #F5D9D9,
+        },
+
+        link: {
+            default: #FF7A7A,
+            hover: #F55757,
+            active: #B44141,
+            disabled: #B9B9B9
+        }
+    },
+
+    bg: {
+        base: #F7F7F7,
+
+        button: {
+            default: linear-gradient(90deg, #F75757 0%, #B44141 100%),
+            hover: #B44141,
+            active: radial-gradient(circle, rgba(180,65,65,1) 70%, rgba(166,60,60,1) 100%),
+            disabled: #B9B9B9,
+        }
+    }
+}

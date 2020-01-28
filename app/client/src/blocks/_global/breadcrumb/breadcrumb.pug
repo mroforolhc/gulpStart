@@ -1,0 +1,16 @@
+.breadcrumb
+    ul.breadcrumb__list(itemscope itemtype="http://schema.org/BreadcrumbList")
+        li.breadcrumb__item(itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem")
+            a.breadcrumb__link(itemprop="item" href="")
+                span(itemprop="name") Первый уровень
+                meta(itemprop="position" content="1")
+            span.breadcrumb__slash /
+        li.breadcrumb__item(itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem")
+            a.breadcrumb__link(itemprop="item" href="")
+                span(itemprop="name") Второй уровень
+                meta(itemprop="position" content="2")
+            span.breadcrumb__slash /
+        li.breadcrumb__item(itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem")
+            span.breadcrumb__span(itemprop="item")
+                span(itemprop="name") Третий уровень (вы находитесь здесь)
+                meta(itemprop="position" content="3")

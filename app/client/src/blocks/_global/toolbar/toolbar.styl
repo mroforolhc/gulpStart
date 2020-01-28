@@ -1,0 +1,157 @@
+.mobile-toolbar
+    z-index 10
+    +above(sm)
+        display none
+
+    &__container
+        z-index 10
+        overflow-y scroll
+        position fixed
+        padding-x 20px
+        bottom 48px
+        height 0
+        width 100%
+        background-color #F7F7F7
+        box-shadow 0 4px 23px rgba(0, 0, 0, 0.346)
+        transition height 0.3s
+
+    &__close
+        mx-cross #E5E5E5, 2px, 21px
+        position absolute
+        right 10px
+        top 10px
+        cursor pointer
+
+    &__block
+        padding-top 50px
+        display none
+
+        &_show
+            display block
+
+    &__title
+        font-size 30px
+        margin-bottom 30px
+        font-weight 500
+        color #3C3C3C
+        letter-spacing 0.07em
+        text-transform uppercase
+        position relative
+
+    &__list
+        position fixed
+        height 48px
+        padding-x 15px
+        width 100%
+        bottom 0
+        z-index 10
+        background-color #303030
+        box-shadow 0 0 11px rgba(0, 0, 0, 0.25)
+        display flex
+        justify-content space-between
+        align-items center
+
+    &__item
+        padding-x 0
+
+    &__icon
+        fill #FF7A7A
+
+        &_active
+            fill #B44141
+
+        &_burger
+            size 26px 17px
+
+        &_mobile
+            size 25px 29px
+
+    &__button
+        padding 8px 34px
+
+.toolbar-menu
+    padding-bottom 40px
+    .menu
+        &_submenu
+            height 0
+            overflow-y hidden
+            transition opacity 0.3s
+
+        &__list
+            margin 0
+            list-style-type none
+
+        &__item
+            &_opened
+                > .menu__link-container
+                    background-color #303030
+                    margin-x -20px
+                    padding 15px 20px
+                    margin-bottom 10px
+
+                    a
+                        color white
+
+                    .menu__link-before
+                        mx-arrow('left', white, 1px, 8px, 14px)
+                        margin-right 10px
+
+                    .menu__link-after
+                        display none !important
+
+        &__link
+            color #303030
+            display block
+            text-transform uppercase
+            font-size 14px
+            font-weight 500
+            letter-spacing: 0.095em
+
+            &:active
+                color: _color.font.link.active
+
+            &-container
+                display flex
+                align-items center
+                padding 10px 0
+                .menu__link-after
+                    mx-arrow('top', #B4B4B4, 1px, 3px, 5px)
+                    margin-left 7px
+                    display inline-block
+                    transform rotate(180deg)
+
+.toolbar-contacts
+    &__block
+        margin-bottom 35px
+        &_call
+            font-size 16px
+    &__title
+        color #3c3c3c
+        text-transform uppercase
+        font-size 16px
+        margin-bottom 25px
+        font-weight 500
+    &__item
+        display flex
+        align-items center
+        margin-bottom 10px
+    &__img
+        width 35px
+        margin-right 15px
+        display flex
+        justify-content center
+        &-allsoc
+            size 35px
+        &-phone
+            size 15px 24px
+        &-mail
+            size 23px 18px
+        &-time
+            size 24px
+    &__text
+        color black
+        &_red
+            color #F55757
+
+body.toolbar-open
+    overflow hidden

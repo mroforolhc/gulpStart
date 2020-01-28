@@ -1,4 +1,7 @@
+require('dotenv').config();
 const gulp = require('gulp');
+
+const { isWatch, isProduction } = require('./gulp_options');
 
 function lazyRequireTask(taskName, path) {
     gulp.task(taskName, (callback) => {
@@ -14,12 +17,10 @@ lazyRequireTask('bootstrap', './tasks/bootstrap');
 lazyRequireTask('styles', './tasks/styles');
 lazyRequireTask('images', './tasks/images');
 lazyRequireTask('fonts', './tasks/fonts');
-lazyRequireTask('sprites:png', './tasks/spritesPng');
-lazyRequireTask('sprites:svg', './tasks/spritesSvg');
-lazyRequireTask('sprites:svg', './tasks/spritesSvg');
+lazyRequireTask('sprites:png', './tasks/sprites_png');
+lazyRequireTask('sprites:svg', './tasks/sprites_svg');
 lazyRequireTask('webpack', './tasks/webpack');
 
-lazyRequireTask('deploy', './tasks/deploy');
 lazyRequireTask('webserver', './tasks/webserver');
 lazyRequireTask('watcher', './tasks/watcher');
 
@@ -29,5 +30,14 @@ gulp.task('build', gulp.series(
     gulp.parallel('styles', 'html', 'webpack'),
 ));
 
-gulp.task('dev', gulp.parallel('webserver', 'watcher'));
-gulp.task('default', gulp.series('build', 'dev'));
+if (isWatch) {
+    if (isProduction) {
+        // production & watch
+        exports.default = gulp.series('build', 'watcher');
+    } else {
+        // development & watch
+        exports.default = gulp.series('build', gulp.parallel('watcher', 'webserver'));
+    }
+} else {
+    exports.default = gulp.series('build');
+}

@@ -1,6 +1,6 @@
 const browserSync = require('browser-sync').create();
 
-const config = require('../gulpOptions').browserSyncConfig;
+const config = require('../gulp_options').browserSyncConfig;
 
 module.exports = () => {
     browserSync.init(config);

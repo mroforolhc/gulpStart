@@ -1,11 +1,11 @@
 const { src, dest } = require('gulp');
 const $ = require('gulp-load-plugins')();
 
-const { path } = require('../gulpOptions');
-const isProduction = require('../gulpOptions').PRODUCTION;
+const { isProduction, path, isDeploy } = require('../gulp_options');
+
+const distPath = isDeploy ? path.deploy.css : path.dist.css;
 
 module.exports = () => src(path.src.styles)
-    .pipe($.if(!isProduction, $.sourcemaps.init()))
     .pipe($.stylus({
         'include css': true,
     }))
@@ -14,10 +14,9 @@ module.exports = () => src(path.src.styles)
         title: 'Styles',
     }))
     .pipe($.if(isProduction, $.autoprefixer()))
-    .pipe($.if(isProduction, $.cleanCss()))
     .pipe($.if(isProduction, $.groupCssMediaQueries()))
-    .pipe($.if(!isProduction, $.sourcemaps.write('./')))
-    .pipe(dest(path.dist.css));
+    .pipe($.if(isProduction, $.cleanCss()))
+    .pipe($.flatten())
+    .pipe(dest(distPath));
 
-// Dev: sourcemaps + stylus
 // Prod: stylus + prefixes + minify + gcmq

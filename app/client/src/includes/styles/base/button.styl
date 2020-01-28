@@ -1,0 +1,27 @@
+button
+    border none
+    outline none
+    background-color transparent
+    cursor pointer
+
+.button
+    background _color.bg.button.default
+    cursor pointer
+    text-transform uppercase
+    font-weight 500
+    display inline-block
+    color _color.font.button.default
+    text-align center
+    padding 15px 20px
+    line-height normal
+    &:hover
+        color _color.font.button.default
+        background _color.bg.button.hover
+    &:active
+        color _color.font.button.active
+        background _color.bg.button.active
+
+.button[disabled]
+    background _color.bg.button.disabled
+    color _color.font.button.disabled
+    cursor default
