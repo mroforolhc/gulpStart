@@ -4,7 +4,7 @@
 ```
 git clone https://github.com/mroforolhc/gulpStart new-project && cd new-project
 git init
-cd app/client && yarn
+yarn
 ```
 ## Запуск
 
