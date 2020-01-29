@@ -16,25 +16,13 @@ export default class FontFaceLoader {
 
     init() {
         const html = document.documentElement;
-        if (sessionStorage.fontsLoaded) {
-            html.classList.add('fonts-loaded');
-            // console.log('sessionStorage');
-        } else {
-            Promise.all(this.observers)
-            // eslint-disable-next-line no-unused-vars
-                .then((fonts) => {
-                    html.classList.add('fonts-loaded');
-                    sessionStorage.fontsLoaded = true;
-
-                    // fonts.forEach((font) => {
-                    //   console.log(`${font.family} ${font.weight} loaded`);
-                    // });
-                })
-            // eslint-disable-next-line no-unused-vars
-                .catch((err) => {
-                    html.classList.add('fonts-failed');
-                    // console.warn('Some critical font are not available:', err);
-                });
-        }
+        return Promise.all(this.observers)
+            .then(() => {
+                html.classList.add('fonts-loaded');
+                sessionStorage.fontsLoaded = true;
+            })
+            .catch(() => {
+                html.classList.add('fonts-failed');
+            });
     }
 }
