@@ -19,7 +19,7 @@ const distPath = isDeploy ? path.deploy.js : path.dist.js;
 const options = {
     output: {
         library: '[name]',
-        publicPath: '/assets/js/',
+        publicPath: isDeploy ? path.deploy.publicPath : path.dist.publicPath,
     },
     mode: isProduction ? 'production' : 'development',
     watch: isWatch,

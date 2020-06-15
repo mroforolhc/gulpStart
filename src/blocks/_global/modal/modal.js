@@ -16,8 +16,15 @@ function clickDataModal(event) {
     if (loading) {
         return false;
     }
-    loading = true;
-    Modal.load(link.getAttribute('href'), link.dataset.modalMod);
+    if (link.dataset.modalInline !== undefined) {
+        const content = document.querySelector(link.dataset.modalInline);
+        if (content) {
+            Modal.open(content.innerHTML, link.dataset.modal);
+        }
+    } else {
+        loading = true;
+        Modal.load(link.getAttribute('href'), link.dataset.modal);
+    }
 }
 
 const Modal = {
@@ -29,6 +36,7 @@ const Modal = {
             main.classList.add(modifier);
         }
         nojq.html(container, data);
+        app.events.emit('modal.open', { el: overlay });
     },
     close() {
         document.body.classList.remove('modal-open');
@@ -41,7 +49,7 @@ const Modal = {
             {
                 method: 'GET',
                 credentials: 'same-origin',
-                cache: 'no-cache',
+                cache: 'no-store',
                 headers: {
                     'X-Requested-With': 'XMLHttpRequest',
                 },
@@ -66,11 +74,10 @@ const Modal = {
             return false;
         }
 
-        for (const item of document.querySelectorAll('[data-modal]')) {
-            item.addEventListener('click', clickDataModal);
-        }
-
         document.addEventListener('click', (e) => {
+            if (e.target.dataset.modal !== undefined || e.target.closest('[data-modal]')) {
+                clickDataModal(e);
+            }
             if (e.target.classList.contains('overlay_modal') || e.target.dataset.modalClose !== undefined) {
                 Modal.close();
             }

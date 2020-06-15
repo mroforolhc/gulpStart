@@ -1,5 +1,3 @@
-import Velocity from 'velocity-animate';
-
 let el;
 let inited = false;
 
@@ -7,12 +5,16 @@ const Loader = {
     show() {
         this.init();
         if (el) {
-            Velocity(el, 'fadeIn', { duration: 300 });
+            app.import('velocity').then(({ default: Velocity }) => {
+                Velocity(el, 'fadeIn', { duration: 300 });
+            });
         }
     },
     hide() {
         if (el) {
-            Velocity(el, 'fadeOut', { duration: 300 });
+            app.import('velocity').then(({ default: Velocity }) => {
+                Velocity(el, 'fadeOut', { duration: 300 });
+            });
         }
     },
     init() {

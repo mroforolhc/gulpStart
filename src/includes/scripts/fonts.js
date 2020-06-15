@@ -19,7 +19,9 @@ export default class FontFaceLoader {
         return Promise.all(this.observers)
             .then(() => {
                 html.classList.add('fonts-loaded');
-                sessionStorage.fontsLoaded = true;
+                // fonts.forEach((font) => {
+                //     console.log(`${font.family} ${font.weight} loaded`);
+                // });
             })
             .catch(() => {
                 html.classList.add('fonts-failed');

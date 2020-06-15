@@ -8,12 +8,12 @@ const distPath = isDeploy ? path.deploy.sprites : path.dist.sprites;
 module.exports = () => src(path.src.sprites.svg)
     .pipe($.svgSymbols({
         title: false,
-        id: 'svg_%f',
-        templates: ['default-stylus', 'default-svg'],
+        id: '%f',
+        templates: ['src/includes/sprites/template/svg-size.styl', 'default-svg'],
     }))
     .on('error', $.notify.onError({
         message: '<%= error.message %>',
-        title: 'Png sprites',
+        title: 'Svg sprites',
     }))
     .pipe(dest((file) => {
         if (file.extname === '.svg') {

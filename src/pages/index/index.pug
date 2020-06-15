@@ -4,7 +4,7 @@ prepend head
     - var title = '';
 
 append head
-    link(rel="stylesheet" href="")
+    link(rel="preload" as="style" href="assets/css/index.css" onload="this.rel='stylesheet'")
 
 block content
     main.container-fluid

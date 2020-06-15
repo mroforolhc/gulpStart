@@ -5,7 +5,7 @@ html(lang="ru")
             meta(charset="UTF-8")
             meta(name="viewport" content="width=device-width, height=device-height")
             title #{title}
-            link(rel="preload" as="style" href="assets/css/global.css?v=" + Math.floor(Math.random() * (1000 - 9999) + 9999) onload="this.rel='stylesheet'")
+            link(rel="stylesheet" href="assets/css/global.css?v=" + Math.floor(Math.random() * (1000 - 9999) + 9999))
 
     body
         block header
@@ -25,9 +25,8 @@ html(lang="ru")
 
             include ../blocks/_global/toolbar/toolbar
 
-            script(src="assets/js/polyfills.js")
+            script(src="assets/js/polyfills.js?v=" + Math.floor(Math.random() * (1000 - 9999) + 9999))
             script(crossorigin="anonymous" src="https://polyfill.io/v3/polyfill.min.js?features=default,fetch")
-
-            script(src="assets/js/vendors~global.js")
-            script(src="assets/js/global.js")
+            script(src="assets/js/vendors~global.js?v=" + Math.floor(Math.random() * (1000 - 9999) + 9999))
+            script(src="assets/js/global.js?v=" + Math.floor(Math.random() * (1000 - 9999) + 9999))
 

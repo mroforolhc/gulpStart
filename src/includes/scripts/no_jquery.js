@@ -24,6 +24,9 @@ function html(node, content) {
         const head = document.getElementsByTagName('head')[0] || document.documentElement;
         const script = document.createElement('script');
         script.type = 'text/javascript';
+        if (elem.src) {
+            script.src = elem.src;
+        }
         try {
             script.appendChild(document.createTextNode(data));
         } catch (e) {

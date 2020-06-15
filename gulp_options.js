@@ -25,6 +25,7 @@ module.exports.path = {
         uploads: '../../public/assets/images/uploads/',
         fonts: '../../public/assets/fonts/',
         sprites: '../../public/assets/images/sprites/',
+        publicPath: '/assets/js/',
     },
 
     dist: {
@@ -35,6 +36,7 @@ module.exports.path = {
         uploads: 'dist/assets/images/uploads/',
         fonts: 'dist/assets/fonts/',
         sprites: 'dist/assets/images/sprites/',
+        publicPath: '/assets/js/',
     },
 
     src: {
@@ -51,8 +53,8 @@ module.exports.path = {
     },
 
     watch: {
-        pug: ['src/pages/**/*.pug', 'src/blocks/**/*.pug'],
-        styles: ['src/pages/**/*.{styl,css}', 'src/blocks/**/*.styl'],
+        pug: ['src/{blocks,pages,includes}/**/*.pug'],
+        styles: ['src/{blocks,pages,includes}/**/*.{styl,css}'],
         img: ['src/{blocks,pages}/**/*.{jpg,png,svg,gif}'],
         fonts: 'src/includes/fonts/**/*.*',
         sprites: {
