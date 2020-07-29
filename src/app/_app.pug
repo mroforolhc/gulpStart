@@ -5,28 +5,26 @@ html(lang="ru")
             meta(charset="UTF-8")
             meta(name="viewport" content="width=device-width, height=device-height")
             title #{title}
+            link(rel="preload" as="font" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500&amp;display=swap" onload="this.rel='stylesheet'")
+            link(rel="preload" as="font" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;600&display=swap" onload="this.rel='stylesheet'")
             link(rel="stylesheet" href="assets/css/global.css?v=" + Math.floor(Math.random() * (1000 - 9999) + 9999))
 
     body
         block header
-            include ../blocks/_global/header/header
+            a(href="kek.html" data-modal="test") Модалощка
 
         block content
             p nothing
 
         block footer
-            include ../blocks/_global/footer/footer
-
+            #test
         block scripts
-            .overlay.overlay_modal
-                .modal
-                    .modal__close(data-modal-close)
-                    .modal__container
+            #modal
 
-            include ../blocks/_global/toolbar/toolbar
 
             script(src="assets/js/polyfills.js?v=" + Math.floor(Math.random() * (1000 - 9999) + 9999))
             script(crossorigin="anonymous" src="https://polyfill.io/v3/polyfill.min.js?features=default,fetch")
-            script(src="assets/js/vendors~global.js?v=" + Math.floor(Math.random() * (1000 - 9999) + 9999))
-            script(src="assets/js/global.js?v=" + Math.floor(Math.random() * (1000 - 9999) + 9999))
+
+            script(src="assets/js/vendors~app.js?v=" + Math.floor(Math.random() * (1000 - 9999) + 9999))
+            script(src="assets/js/app.js?v=" + Math.floor(Math.random() * (1000 - 9999) + 9999))
 

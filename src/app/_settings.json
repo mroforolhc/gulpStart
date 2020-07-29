@@ -1,0 +1,16 @@
+{
+  "fonts": [
+    {"Open Sans": {"weight": 300, "style": "normal"}},
+    {"Open Sans": {"weight": 600, "style": "normal"}},
+    {"Montserrat": {"weight": 300, "style": "normal"}},
+    {"Montserrat": {"weight": 500, "style": "normal"}}
+  ],
+  "grid": {
+    "xs": {"size": 0, "maxWidth": 420, "gutter": 30},
+    "sm": {"size": 640, "maxWidth": 610, "gutter": 30},
+    "md": {"size": 960, "maxWidth": 900, "gutter": 30},
+    "lg": {"size": 1280, "maxWidth": 1220, "gutter": 30},
+    "xl": {"size": 1600, "maxWidth": 1540, "gutter": 40},
+    "ml": {"size": 1920, "maxWidth": 1840, "gutter": 50}
+  }
+}

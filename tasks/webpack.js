@@ -24,24 +24,33 @@ const options = {
     mode: isProduction ? 'production' : 'development',
     watch: isWatch,
     module: {
-        rules: [{
-            loader: 'babel-loader',
-            options: {
-                presets: [
-                    [
-                        '@babel/preset-env',
-                        {
-                            useBuiltIns: 'usage',
-                            corejs: { version: 3, proposals: false },
-                            modules: false,
-                            loose: true,
-                        },
-                    ],
-                ],
-                plugins: ['@babel/plugin-proposal-class-properties'],
+        rules: [
+            {
+                test: /\.m?js$/,
+                exclude: /node_modules(?!([\\/])(swiper|dom7))/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: [
+                            [
+                                '@babel/preset-env',
+                                {
+                                    useBuiltIns: 'usage',
+                                    corejs: { version: 3, proposals: false },
+                                    modules: false,
+                                    loose: true,
+                                },
+                            ],
+                            '@babel/preset-react',
+                        ],
+                        plugins: [
+                            ['@babel/plugin-proposal-decorators', { legacy: true }],
+                            ['@babel/plugin-proposal-class-properties', { loose: true }],
+                        ],
+                    },
+                },
             },
-            exclude: /node_modules(?!([\\/])(swiper|dom7))/,
-        }],
+        ],
     },
     plugins: !isWatch ? [
         new BundleAnalyzerPlugin({

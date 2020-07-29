@@ -1,6 +1,3 @@
-$IMG-PATH = '../images/'
-$FONT-PATH = '../fonts/'
-
 mx-sqrt($x)
     return math($x, 'sqrt')
 
@@ -88,10 +85,10 @@ size($width, $height = $width)
     height: $height
 
 img-url($file)
-    url($IMG-PATH + $file)
+    url($img-path + $file)
 
 font-url($font) // $font = folder + name, example: ComicSans/Comicsans.ttf
-    url($FONT-PATH + $font)
+    url($font-path + $font)
 
 mx-font-face($name, $path, $weight = false, $style = false)
     @font-face

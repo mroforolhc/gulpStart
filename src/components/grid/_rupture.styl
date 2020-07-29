@@ -1,0 +1,14 @@
+@require '../../../node_modules/rupture/rupture/index.styl'
+
+rupture.scale = ''
+rupture.scale-names = ''
+rupture.anti-overlap = -1px
+
+// fill rupture variables
+for $scale, $breakpoint in $breakpoints
+    push(rupture.scale, unit($breakpoint.size, px))
+    push(rupture.scale-names, $scale)
+
+// delete first elements ('')
+shift(rupture.scale)
+shift(rupture.scale-names)

@@ -41,32 +41,27 @@ module.exports.path = {
 
     src: {
         pug: 'src/pages/**/*.pug',
-        styles: 'src/pages/**/*.styl',
-        js: 'src/pages/**/*.js',
-        img: ['src/{blocks,pages}/**/*.{jpg,png,svg,gif}'],
-        sprites: {
-            svg: 'src/includes/sprites/**/*.svg',
-            png: ['src/includes/sprites/**/*.png', '!src/includes/sprites/*.png'],
-            styles: 'src/includes/styles/sprites/',
-        },
-        fonts: 'src/includes/fonts/**/*.*',
+        styles: ['src/app/app.styl', 'src/pages/**/*.styl'],
+        js: ['src/app/app.js', 'src/pages/**/*.js'],
+        // img: ['src/{blocks,pages}/**/*.{jpg,png,svg,gif}'],
+        // sprites: {
+        //     svg: 'src/includes/sprites/**/*.svg',
+        //     png: ['src/includes/sprites/**/*.png', '!src/includes/sprites/*.png'],
+        //     styles: 'src/includes/styles/sprites/',
+        // },
+        // fonts: 'src/includes/fonts/**/*.*',
     },
 
-    watch: {
-        pug: ['src/{blocks,pages,includes}/**/*.pug'],
-        styles: ['src/{blocks,pages,includes}/**/*.{styl,css}'],
-        img: ['src/{blocks,pages}/**/*.{jpg,png,svg,gif}'],
-        fonts: 'src/includes/fonts/**/*.*',
-        sprites: {
-            png: 'src/includes/sprites/**/*.png',
-            svg: 'src/includes/sprites/**/*.svg',
-        },
-    },
+    // watch: {
+    //     pug: ['src/{blocks,pages,includes}/**/*.pug'],
+    //     styles: ['src/{blocks,pages,includes}/**/*.{styl,css}'],
+    //     img: ['src/{blocks,pages}/**/*.{jpg,png,svg,gif}'],
+    //     fonts: 'src/includes/fonts/**/*.*',
+    //     sprites: {
+    //         png: 'src/includes/sprites/**/*.png',
+    //         svg: 'src/includes/sprites/**/*.svg',
+    //     },
+    // },
 
-    bootstrap: {
-        src: 'src/includes/styles/bootstrap/bootstrap.scss',
-        dist: 'src/includes/styles/css/',
-    },
-
-    clean: ['./dist', './src/includes/styles/sprites'],
+    // clean: ['./dist', './src/includes/styles/sprites'],
 };

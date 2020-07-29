@@ -1,0 +1,108 @@
+$gridColumns = 12;
+
+// placeholder-selector
+$defaultCol
+    position: relative;
+    width: 100%;
+    padding-right: unit($breakpoints[rupture.scale-names[0]].gutter / 2, px);
+    padding-left: unit($breakpoints[rupture.scale-names[0]].gutter / 2, px);
+
+mx-make-col-null()
+    flex-basis: 0;
+    flex-grow: 1;
+    min-width: 0; // See https://github.com/twbs/bootstrap/issues/25410
+    max-width: 100%;
+
+mx-make-col-auto()
+    flex: 0 0 auto;
+    width: auto;
+    max-width: 100%; // Reset earlier grid tiers
+
+mx-make-col($size, $columns)
+    flex: 0 0 percentage($size / $columns);
+    max-width: percentage($size / $columns);
+
+mx-make-offset($size, $columns)
+    $num = $size / $columns
+    if ($num == 0)
+        margin-left: $num;
+    else
+        margin-left: percentage($num);
+
+mx-make-default-cols($scaleName)
+    if ($scaleName == rupture.scale-names[0])
+        $name = ''
+    else
+        $name = '-' + $scaleName
+
+    for $indexCol in range(1, $gridColumns)
+        .col{$name}-{$indexCol}
+            @extends $defaultCol
+
+    .col{$name}
+    .col{$name}-auto
+        @extends $defaultCol
+
+mx-make-cols($scaleName, $isDifferentGutter)
+    if ($scaleName == rupture.scale-names[0])
+        $name = ''
+
+        .col{$name}
+            mx-make-col-null()
+        .col{$name}-auto
+            mx-make-col-auto()
+        .order{$name}-first
+            order: -1;
+        .order{$name}-last
+            order: $gridColumns + 1;
+
+        for $index in range(0, $gridColumns)
+            if ($index != 0)
+                .col{$name}-{$index}
+                    mx-make-col($index, $gridColumns)
+                .order{$name}-{$index}
+                    order: $index;
+
+            if ($index != $gridColumns)
+                .offset{$name}-{$index}
+                    mx-make-offset($index, $gridColumns)
+    else
+        $name = '-' + $scaleName
+
+        .col{$name}
+            +above($scaleName)
+                mx-make-col-null()
+                if ($isDifferentGutter)
+                    padding-right: unit($breakpoints[$scaleName].gutter / 2, px);
+                    padding-left: unit($breakpoints[$scaleName].gutter / 2, px);
+        .col{$name}-auto
+            +above($scaleName)
+                mx-make-col-auto()
+                if ($isDifferentGutter)
+                    padding-right: unit($breakpoints[$scaleName].gutter / 2, px);
+                    padding-left: unit($breakpoints[$scaleName].gutter / 2, px);
+
+        .order{$name}-first
+            +above($scaleName)
+                order: -1;
+        .order{$name}-last
+            +above($scaleName)
+                order: $gridColumns + 1;
+
+        for $index in range(0, $gridColumns)
+            if ($index != 0)
+                .col{$name}-{$index}
+                    +above($scaleName)
+                        mx-make-col($index, $gridColumns)
+                        if ($isDifferentGutter)
+                            padding-right: unit($breakpoints[$scaleName].gutter / 2, px);
+                            padding-left: unit($breakpoints[$scaleName].gutter / 2, px);
+
+                .order{$name}-{$index}
+                    +above($scaleName)
+                        order: $index;
+
+            if ($index != $gridColumns)
+                .offset{$name}-{$index}
+                    +above($scaleName)
+                        mx-make-offset($index, $gridColumns)

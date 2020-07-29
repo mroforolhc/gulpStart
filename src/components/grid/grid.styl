@@ -1,0 +1,77 @@
+$json = json('../../app/_settings.json', { hash: true })
+$breakpoints = $json.grid
+
+@import "_rupture.styl"
+@import "_grid-cols.styl"
+
+mx-make-container($scaleName)
+    if ($scaleName == rupture.scale-names[0])
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    padding-left: unit($breakpoints[$scaleName].gutter / 2, px);
+    padding-right: unit($breakpoints[$scaleName].gutter / 2, px);
+
+mx-update-max-width-container($scaleName)
+    max-width: unit($breakpoints[$scaleName].maxWidth, px);
+
+mx-make-row($scaleName)
+    if ($scaleName == rupture.scale-names[0])
+        display: flex;
+        flex-wrap: wrap;
+    margin-right: unit($breakpoints[$scaleName].gutter / 2 * -1, px);
+    margin-left: unit($breakpoints[$scaleName].gutter / 2 * -1, px);
+
+$displays = none inline inline-block block table table-row table-cell flex inline-flex
+
+for $scaleName, $index in rupture.scale-names
+    $isDifferentGutter = false
+
+    if $index == 0
+        .container
+        .container-fluid
+            mx-make-container($scaleName)
+
+        .row
+            mx-make-row($scaleName)
+
+        .no-gutters
+            margin-right: 0 !important
+            margin-left: 0 !important
+            > .col,
+            > [class*="col-"]
+                padding-right: 0
+                padding-left: 0
+
+        for $value in $displays
+            .d-{$value}
+                display: $value
+
+    else
+        $scaleNamePrev = rupture.scale-names[$index - 1]
+        $cur = $breakpoints[$scaleName].gutter
+        $prev = $breakpoints[$scaleNamePrev].gutter
+        $isDifferentGutter = $cur != $prev
+
+        if ($isDifferentGutter)
+            .container
+            .container-fluid
+                +above($scaleName)
+                    mx-make-container($scaleName)
+            .row
+                +above($scaleName)
+                    mx-make-row($scaleName)
+
+        .container
+            +above($scaleName)
+                mx-update-max-width-container($scaleName)
+
+        for $value in $displays
+            .d-{$scaleName}-{$value}
+                +above($scaleName)
+                    display: $value
+
+    mx-make-default-cols($scaleName)
+    mx-make-cols($scaleName, $isDifferentGutter)
+
+

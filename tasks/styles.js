@@ -13,8 +13,8 @@ module.exports = () => src(path.src.styles)
         message: '<%= error.message %>',
         title: 'Styles',
     }))
-    .pipe($.if(isProduction, $.autoprefixer()))
-    .pipe($.if(isProduction, $.groupCssMediaQueries()))
+    .pipe($.autoprefixer())
+    .pipe($.groupCssMediaQueries())
     .pipe($.if(isProduction, $.cleanCss()))
     .pipe($.flatten())
     .pipe(dest(distPath));
