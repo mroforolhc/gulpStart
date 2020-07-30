@@ -11,17 +11,59 @@ class ModalState {
     @observable content = '';
 }
 
+const ESC_KEY = 27;
+const modalState = new ModalState();
+
 @observer
 class ModalComponent extends React.Component {
+    constructor(props) {
+        super(props);
+        this.shouldClose = null;
+    }
+
+    handleOverlayOnClick = () => {
+        if (this.shouldClose === null) this.shouldClose = true;
+
+        if (this.shouldClose) modalState.isOpen = false;
+        this.shouldClose = null;
+    };
+
+    handleModalOnClick = () => {
+        this.shouldClose = false;
+    };
+
+    handleCloseOnClick = () => {
+        modalState.isOpen = false;
+    };
+
+    handleKeyDown = (e) => {
+        if (e.keyCode === ESC_KEY) {
+            e.stopPropagation();
+            modalState.isOpen = false;
+        }
+    };
+
     render() {
-        const { state } = this.props;
+        let overlayClassNames = 'overlay overlay_modal';
+        overlayClassNames += modalState.isOpen ? ' overlay_show' : '';
+
         return (
-            <div className="overlay overlay_modal">
-                <div className={state.modifier ? `modal modal_${state.modifier}` : 'modal'}>
-                    <div className="modal__close"/>
-                    <div className="modal__container">
-                        {state.content}
-                    </div>
+            <div
+                className={overlayClassNames}
+                onClick={this.handleOverlayOnClick}
+            >
+                <div
+                    className={modalState.modifier ? `modal modal_${modalState.modifier}` : 'modal'}
+                    onClick={this.handleModalOnClick}
+                    onKeyDown={this.handleKeyDown}
+                    tabIndex="0"
+                >
+                    <div className="modal__close" onClick={this.handleCloseOnClick} aria-hidden="true" />
+                    <div
+                        className="modal__container"
+                        /* eslint-disable-next-line react/no-danger */
+                        dangerouslySetInnerHTML={{ __html: modalState.content }}
+                    />
                 </div>
             </div>
         );
@@ -31,11 +73,11 @@ class ModalComponent extends React.Component {
 class Modal extends BaseComponent {
     constructor(name) {
         super(name);
-        this.state = new ModalState();
+        this.state = modalState;
     }
 
     loadContent(url) {
-        fetch(url,
+        return fetch(url,
             {
                 method: 'GET',
                 credentials: 'same-origin',
@@ -60,7 +102,7 @@ class Modal extends BaseComponent {
 
     init() {
         ReactDOM.render(
-            <ModalComponent state={this.state}/>,
+            <ModalComponent />,
             document.getElementById('modal'),
         );
 
@@ -78,7 +120,22 @@ class Modal extends BaseComponent {
 
         reaction(
             () => this.state.url,
-            (url) => this.loadContent(url),
+            (url) => {
+                if (url) this.loadContent(url).then(() => this.open());
+            },
+        );
+
+        reaction(
+            () => this.state.isOpen,
+            (isOpen) => {
+                if (isOpen) {
+                    document.body.classList.add('modal-open');
+                    document.querySelector('.modal').focus();
+                } else {
+                    document.body.classList.remove('modal-open');
+                    this.state.url = '';
+                }
+            },
         );
     }
 }

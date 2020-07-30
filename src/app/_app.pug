@@ -7,11 +7,12 @@ html(lang="ru")
             title #{title}
             link(rel="preload" as="font" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500&amp;display=swap" onload="this.rel='stylesheet'")
             link(rel="preload" as="font" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;600&display=swap" onload="this.rel='stylesheet'")
-            link(rel="stylesheet" href="assets/css/global.css?v=" + Math.floor(Math.random() * (1000 - 9999) + 9999))
+            link(rel="stylesheet" href="assets/css/app.css?v=" + Math.floor(Math.random() * (1000 - 9999) + 9999))
 
     body
         block header
             a(href="kek.html" data-modal="test") Модалощка
+            a(href="kek2.html" data-modal="test2") Модалощка2
 
         block content
             p nothing

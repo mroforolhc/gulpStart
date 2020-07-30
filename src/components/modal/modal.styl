@@ -5,17 +5,15 @@ body.modal-open
 .overlay
     visibility hidden
     position fixed
-    display flex
-    align-items center
-    justify-content center
     top 0
     left 0
     right 0
     bottom 0
     background rgba(196,196,196,0.5)
-    overflow-y scroll
-    &_modal
-        z-index 3000
+    z-index 3000
+    display flex
+    align-items center
+    justify-content center
 
 .modal
     visibility hidden
@@ -27,43 +25,23 @@ body.modal-open
     box-shadow 0 0 41px rgba(#000, 0.5)
     transition opacity 0.5s
     opacity 0
-    border-top 8px solid black
-    +above(md)
-        border-top 18px solid black
-    &_cart
-        max-width 951px
-    &_route
-        max-width 1376px
+    outline none
 
     &__close
         z-index 100
-        mx-cross #E5E5E5, 2px, 15px
+        mx-cross(#E5E5E5, 2px, 15px)
         right 20px
         top 20px
         cursor pointer
         +above(sm)
-            mx-cross #E5E5E5, 2px, 34px
+            mx-cross(#E5E5E5, 2px, 34px)
     &__container
         padding 20px 30px 50px
         +above(sm)
             padding 80px 50px 100px
-    &__title
-        font-size 44px
-        position relative
-        color black
-        text-transform uppercase
-        padding-bottom 15px
-        margin-bottom 50px
-        &:after
-            content ''
-            position absolute
-            size 81px 3px
-            bottom 0
-            left 0
-            background-color black
 
 // animation
-.modal-show.overlay
+.overlay_show.overlay
     visibility visible
     .modal
         opacity 1
