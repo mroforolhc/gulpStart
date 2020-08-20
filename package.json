@@ -9,10 +9,10 @@
     "ie 11"
   ],
   "scripts": {
-    "dev": "gulp --watch",
-    "dev:deploy": "gulp --watch --deploy",
+    "dev": "gulp --series build dev",
+    "dev:deploy": "gulp build deployWatcher --series",
     "build": "gulp",
-    "build:deploy": "gulp --deploy",
+    "build:deploy": "gulp build deploy --series",
     "webpack": "cross-env NODE_ENV=production gulp webpack",
     "analyzer": "webpack-bundle-analyzer stats.json dist/assets/js"
   },
@@ -22,6 +22,7 @@
     "@popperjs/core": "^2.4.4",
     "babel-preset-mobx": "^2.0.0",
     "bootstrap": "^4.5.0",
+    "final-form": "^4.20.1",
     "fontfaceobserver": "^2.1.0",
     "fslightbox": "^3.0.8",
     "jquery": "^3.5.1",
@@ -31,6 +32,7 @@
     "nouislider": "^14.6.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-final-form": "^6.5.1",
     "react-modal": "^3.11.2",
     "rupture": "^0.7.1",
     "svg4everybody": "^2.1.9",

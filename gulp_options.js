@@ -1,13 +1,11 @@
-module.exports.isProduction = (process.env.NODE_ENV ? process.env.NODE_ENV.trim().toLowerCase() : '') === 'production';
-module.exports.isWatch = process.argv.includes('--watch');
-module.exports.isDeploy = process.argv.includes('--deploy');
+const deploy = '../../public/';
+const dist = 'dist/';
 
+module.exports.isProduction = (process.env.NODE_ENV ? process.env.NODE_ENV.trim().toLowerCase() : '') === 'production';
 module.exports.browserSyncConfig = {
     server: {
         baseDir: './dist',
     },
-
-    // tunnel: true,
     open: false,
     injectChanges: false,
     logFileChanges: false,
@@ -16,52 +14,60 @@ module.exports.browserSyncConfig = {
 };
 
 module.exports.path = {
+    clean: './dist',
+    dist,
+
     deploy: {
-        src: 'dist/assets/**/*.*',
-        dist: '../../public/',
-        js: '../../public/assets/js/',
-        css: '../../public/assets/css/',
-        img: '../../public/assets/images/',
-        uploads: '../../public/assets/images/uploads/',
-        fonts: '../../public/assets/fonts/',
-        sprites: '../../public/assets/images/sprites/',
+        from: `${dist}/assets/**/*.*`,
+        to: deploy,
+    },
+
+    fonts: {
+        src: 'src/components/typography/fonts/**/*.*',
+        watch: 'src/components/typography/fonts/**/*.*',
+        dist: `${dist}/assets/fonts`,
+        deploy: `${deploy}/assets/fonts`,
+    },
+
+    html: {
+        src: 'src/pages/**/*.pug',
+        watch: 'src/{app,pages,components}/**/*.pug',
+        dist,
+    },
+
+    css: {
+        src: ['src/app/app.styl', 'src/pages/**/*.styl'],
+        watch: 'src/{app,pages,components}/**/*.{styl,css}',
+        dist: `${dist}assets/css/`,
+        deploy: `${deploy}assets/css/`,
+    },
+
+    js: {
+        src: ['src/app/app.js', 'src/pages/**/*.js'],
+        watch: 'src/{app,pages,components}/**/*.{js,json}',
+        dist: `${dist}assets/js/`,
+        deploy: `${deploy}assets/js/`,
         publicPath: '/assets/js/',
     },
 
-    dist: {
-        html: 'dist/',
-        js: 'dist/assets/js/',
-        css: 'dist/assets/css/',
-        img: 'dist/assets/images/',
-        uploads: 'dist/assets/images/uploads/',
-        fonts: 'dist/assets/fonts/',
-        sprites: 'dist/assets/images/sprites/',
-        publicPath: '/assets/js/',
+    img: {
+        src: 'src/{components,pages}/**/*.{jpg,png,svg,gif}',
+        watch: 'src/{pages,components}/**/*.{jpg,png,svg,gif}',
+        dist: `${dist}assets/images/`,
+        deploy: `${deploy}assets/images/`,
     },
 
-    src: {
-        pug: 'src/pages/**/*.pug',
-        styles: ['src/app/app.styl', 'src/pages/**/*.styl'],
-        js: ['src/app/app.js', 'src/pages/**/*.js'],
-        // img: ['src/{blocks,pages}/**/*.{jpg,png,svg,gif}'],
-        // sprites: {
-        //     svg: 'src/includes/sprites/**/*.svg',
-        //     png: ['src/includes/sprites/**/*.png', '!src/includes/sprites/*.png'],
-        //     styles: 'src/includes/styles/sprites/',
-        // },
-        // fonts: 'src/includes/fonts/**/*.*',
+    sprites: {
+        svg: {
+            src: 'src/app/sprites/**/*.svg',
+            watch: 'src/app/sprites/**/*.svg',
+        },
+        png: {
+            src: 'src/app/sprites/**/*.png',
+            watch: 'src/app/sprites/**/*.png',
+        },
+        styles: 'src/app/sprites/styles',
+        dist: `${dist}assets/images/sprites/`,
+        deploy: `${deploy}assets/images/sprites/`,
     },
-
-    // watch: {
-    //     pug: ['src/{blocks,pages,includes}/**/*.pug'],
-    //     styles: ['src/{blocks,pages,includes}/**/*.{styl,css}'],
-    //     img: ['src/{blocks,pages}/**/*.{jpg,png,svg,gif}'],
-    //     fonts: 'src/includes/fonts/**/*.*',
-    //     sprites: {
-    //         png: 'src/includes/sprites/**/*.png',
-    //         svg: 'src/includes/sprites/**/*.svg',
-    //     },
-    // },
-
-    // clean: ['./dist', './src/includes/styles/sprites'],
 };

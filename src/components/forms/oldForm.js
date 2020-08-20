@@ -1,6 +1,3 @@
-import * as nojq from './no_jquery';
-import Loader from '../../blocks/_global/loader/loader';
-
 const AjaxForm = {
     init() {
         document.addEventListener('submit', (e) => {

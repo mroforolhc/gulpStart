@@ -1,3 +1,23 @@
+@require '../../../node_modules/rupture/rupture/index.styl'
+
+$jsonSettings = json('../settings.json', { hash: true })
+$breakpoints = $jsonSettings.grid
+
+rupture.scale = ''
+rupture.scale-names = ''
+rupture.anti-overlap = -1px
+
+// fill rupture variables
+for $scale, $breakpoint in $breakpoints
+    push(rupture.scale, unit($breakpoint.size, px))
+    push(rupture.scale-names, $scale)
+
+// delete first elements ('')
+shift(rupture.scale)
+shift(rupture.scale-names)
+
+// --------------------------------------- //
+
 mx-sqrt($x)
     return math($x, 'sqrt')
 
@@ -120,7 +140,7 @@ neg($list)
 
 set($prop, $list1, $startFrom = 0)
     $list = $list1
-    if length($list) <= length($scale-names)
+    if length($list) <= length(rupture.scale-names)
         if $list[$startFrom] == n
             $last = 0
             for v, i in $list
@@ -132,7 +152,7 @@ set($prop, $list1, $startFrom = 0)
                 if i == 0
                     {$prop}: v;
                 else
-                    +above($scale-names[i])
+                    +above(rupture.scale-names[i])
                         {$prop}: v;
 
 // ------- Sprite mixins ---------- //
@@ -147,7 +167,7 @@ sprite-scale($sprite, $w...)
     if length($w) > 1
         for i in (1..length($w) - 1)
             if $w[i] != n
-                +above($scale-names[i])
+                +above(rupture.scale-names[i])
                     sprite-rescale $sprite $w[i]
 
 

@@ -1,3 +1,23 @@
+$color-button = {
+    default: {
+        font: #fff,
+        background: rgb(212,75,56),
+    },
+    hover: {
+        font: #fff,
+        background: rgb(232,95,76),
+    },
+    active: {
+        font: #fff,
+        background: rgb(152,15,0),
+    },
+    disabled: {
+        font: #D6D6D6,
+        background: #B9B9B9,
+    },
+}
+
+
 button
     border none
     outline none
@@ -5,23 +25,21 @@ button
     cursor pointer
 
 .button
-    background _color.bg.button.default
+    background $color-button.default.background
     cursor pointer
-    text-transform uppercase
-    font-weight 500
     display inline-block
-    color _color.font.button.default
+    color $color-button.default.font
     text-align center
-    padding 15px 20px
+    padding 10px 25px
     line-height normal
     &:hover
-        color _color.font.button.default
-        background _color.bg.button.hover
+        color $color-button.hover.font
+        background $color-button.hover.background
     &:active
-        color _color.font.button.active
-        background _color.bg.button.active
+        color $color-button.active.font
+        background $color-button.active.background
 
 .button[disabled]
-    background _color.bg.button.disabled
-    color _color.font.button.disabled
+    background $color-button.disabled.background
+    color $color-button.disabled.font
     cursor default

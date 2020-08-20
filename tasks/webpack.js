@@ -1,28 +1,22 @@
 const webpackStream = require('webpack-stream');
 const { src, dest } = require('gulp');
 const $ = require('gulp-load-plugins')();
-const gulplog = require('gulplog');
 const named = require('vinyl-named');
-const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 // const { webpack } = webpackStream;
 
-const {
-    path,
-    isProduction,
-    isWatch,
-    isDeploy,
-} = require('../gulp_options');
-
-const distPath = isDeploy ? path.deploy.js : path.dist.js;
+const { path, isProduction } = require('../gulp_options');
 
 const options = {
     output: {
         library: '[name]',
-        publicPath: isDeploy ? path.deploy.publicPath : path.dist.publicPath,
+        publicPath: path.js.publicPath,
     },
     mode: isProduction ? 'production' : 'development',
-    watch: isWatch,
+    watch: false,
+    stats: {
+        builtAt: false,
+    },
     module: {
         rules: [
             {
@@ -52,13 +46,6 @@ const options = {
             },
         ],
     },
-    plugins: !isWatch ? [
-        new BundleAnalyzerPlugin({
-            generateStatsFile: true,
-            openAnalyzer: false,
-            analyzerMode: 'disabled',
-        }),
-    ] : [],
     optimization: {
         splitChunks: {
             chunks: 'all',
@@ -74,32 +61,13 @@ const options = {
     },
 };
 
-module.exports = (callback) => {
-    let firstBuild = false;
-
-    function done(err, stats) {
-        firstBuild = true;
-        if (err) {
-            return;
-        }
-        gulplog[stats.hasErrors() ? 'error' : 'info'](stats.toString({
-            colors: true,
-        }));
-    }
-
-    return src(path.src.js)
-        .pipe($.plumber({
-            errorHandler: $.notify.onError((err) => ({
-                title: 'Webpack',
-                message: err.message,
-            })),
-        }))
-        .pipe(named())
-        .pipe(webpackStream(options, null, done))
-        .pipe(dest(distPath))
-        .on('data', () => {
-            if (firstBuild) {
-                callback();
-            }
-        });
-};
+module.exports = () => src(path.js.src)
+    .pipe($.plumber({
+        errorHandler: $.notify.onError((err) => ({
+            title: 'Webpack',
+            message: err.message,
+        })),
+    }))
+    .pipe(named())
+    .pipe(webpackStream(options))
+    .pipe(dest(path.js.dist));

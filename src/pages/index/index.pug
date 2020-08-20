@@ -1,4 +1,4 @@
-extends ../../app/_app
+extends ../../app/app
 
 prepend head
     - var title = '';
@@ -8,6 +8,14 @@ append head
 
 block content
     main.container-fluid
+        div
+            a(class="link" href="ask.html" data-modal="ask") AskForm
+        div
+            a(class="link" href="kek.html" data-modal="callback") CallbackForm
+        div
+            a(class="link" href="kek2.html" data-modal="kek2") Загрузка с сервера2
+        div
+            a(class="link" href="kek1.html" data-modal="kek1") Загрузка с сервера1
 
 append scripts
     script(src="")

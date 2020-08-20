@@ -6,11 +6,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import { observable, reaction } from 'mobx';
-import jsonSettings from './_settings.json';
+import jsonSettings from './settings.json';
 import Manager from '../components/manager/manager';
 import Grid from '../components/grid/grid';
 import Fonts from '../components/typography/fonts';
 import Modal from '../components/modal/modal';
+import Forms from '../components/forms/forms';
 
 class App {
     @observable isLoadPage = false;
@@ -22,6 +23,7 @@ class App {
         this.manager.spy(
             new Grid('grid', this.settings.grid),
             new Fonts('fonts', this.settings.fonts),
+            new Forms('forms'),
             new Modal('modal'),
         );
     }
@@ -32,24 +34,24 @@ class App {
     }
 }
 
-const app = new App(jsonSettings);
-global.app = app;
+const main = new App(jsonSettings);
+global.main = main;
 
 document.addEventListener('DOMContentLoaded', () => {
-    app.start();
+    main.start();
 });
 
 reaction(
-    () => app.manager.getState('fonts').isLoaded,
+    () => main.manager.getState('fonts').isLoaded,
     () => console.log('Fonts is loaded'),
 );
 
 reaction(
-    () => app.manager.getState('grid').currentScale,
+    () => main.manager.getState('grid').currentScale,
     (scale) => console.log(scale.size),
 );
 
 reaction(
-    () => app.isLoadPage,
+    () => main.isLoadPage,
     () => console.log('Page is loaded'),
 );

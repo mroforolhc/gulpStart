@@ -1,8 +1,5 @@
-$json = json('../../app/_settings.json', { hash: true })
-$breakpoints = $json.grid
-
-@import "_rupture.styl"
-@import "_grid-cols.styl"
+@require "../../app/styles/config.styl"
+@require "_grid-cols.styl"
 
 mx-make-container($scaleName)
     if ($scaleName == rupture.scale-names[0])

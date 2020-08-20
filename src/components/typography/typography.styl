@@ -1,4 +1,4 @@
-for key, font in _fonts
+for key, font in $fonts
     _name = font[name]
 
     if options in font
@@ -10,16 +10,16 @@ for key, font in _fonts
 
 .fonts-loaded
     body
-        font-family: _fonts.body.name
+        font-family: $fonts.body.name
     .rouble
         font-family: "Tahoma", sans-serif
     h1, h2, h3, h4, h5, h6,
     .h1, .h2, .h3, .h4, .h5, .h6
-        font-family: _fonts.header.name
+        font-family: $fonts.header.name
 
 .h1
-    set('font-size', _font-size.h1)
+    set('font-size', $font-size.h1)
 .h2
-    set('font-size', _font-size.h2)
+    set('font-size', $font-size.h2)
 .h3, .h4, .h5, .h6
-    set('font-size', _font-size.other-headers)
+    set('font-size', $font-size.other-headers)

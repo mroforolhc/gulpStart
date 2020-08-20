@@ -1,17 +1,18 @@
-import { observable, reaction } from 'mobx';
+import {observable, reaction} from 'mobx';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { observer } from 'mobx-react';
+import {observer} from 'mobx-react';
 import BaseComponent from '../baseComponent/baseComponent';
+
+const ESC_KEY = 27;
 
 class ModalState {
     @observable isOpen = false;
-    @observable url = '';
-    @observable modifier = '';
-    @observable content = '';
+    isComponent;
+    name;
+    content;
 }
 
-const ESC_KEY = 27;
 const modalState = new ModalState();
 
 @observer
@@ -52,18 +53,26 @@ class ModalComponent extends React.Component {
                 className={overlayClassNames}
                 onClick={this.handleOverlayOnClick}
             >
-                <div
-                    className={modalState.modifier ? `modal modal_${modalState.modifier}` : 'modal'}
-                    onClick={this.handleModalOnClick}
-                    onKeyDown={this.handleKeyDown}
-                    tabIndex="0"
-                >
-                    <div className="modal__close" onClick={this.handleCloseOnClick} aria-hidden="true" />
+                <div className="overlay__modal">
                     <div
-                        className="modal__container"
-                        /* eslint-disable-next-line react/no-danger */
-                        dangerouslySetInnerHTML={{ __html: modalState.content }}
-                    />
+                        className={modalState.name ? `modal modal_${modalState.name}` : 'modal'}
+                        onClick={this.handleModalOnClick}
+                        onKeyDown={this.handleKeyDown}
+                        tabIndex="0"
+                    >
+                        <div className="modal__close" onClick={this.handleCloseOnClick} aria-hidden="true" />
+                        {
+                            modalState.isComponent
+                                ? <div className="modal__container">{ modalState.content }</div>
+                                : (
+                                    <div
+                                        className="modal__container"
+                                        /* eslint-disable-next-line react/no-danger */
+                                        dangerouslySetInnerHTML={{ __html: modalState.content }}
+                                    />
+                                )
+                        }
+                    </div>
                 </div>
             </div>
         );
@@ -76,20 +85,15 @@ class Modal extends BaseComponent {
         this.state = modalState;
     }
 
-    loadContent(url) {
-        return fetch(url,
-            {
-                method: 'GET',
-                credentials: 'same-origin',
-                cache: 'no-store',
-                headers: {
-                    'X-Requested-With': 'XMLHttpRequest',
-                },
-            })
-            .then((response) => response.text())
-            .then((data) => {
-                this.state.content = data;
-            });
+    async loadContent(url) {
+        const response = await fetch(url, {
+            method: 'GET',
+            credentials: 'same-origin',
+            cache: 'no-store',
+            headers: { 'X-Requested-With': 'XMLHttpRequest' },
+        });
+
+        if (response.ok) this.state.content = await response.text();
     }
 
     open() {
@@ -106,24 +110,27 @@ class Modal extends BaseComponent {
             document.getElementById('modal'),
         );
 
-        const triggers = document.body.querySelectorAll('[data-modal]');
-        triggers.forEach((trigger) => {
-            const modifier = trigger.dataset.modal;
-            const href = trigger.getAttribute('href');
+        document.addEventListener('click', (e) => {
+            const trigger = e.target;
+            const url = trigger.getAttribute('href');
+            const modalName = trigger.dataset.modal;
 
-            trigger.addEventListener('click', (event) => {
-                event.preventDefault();
-                this.state.modifier = modifier;
-                this.state.url = href;
-            });
+            if (modalName) {
+                e.preventDefault();
+
+                const formComponent = main.manager.getComponent('forms');
+                const form = formComponent.getForm(modalName);
+
+                if (form) {
+                    this.state.isComponent = true;
+                    this.state.content = formComponent.render(modalName);
+                    this.open();
+                } else {
+                    this.state.isComponent = false;
+                    this.loadContent(url).then(() => this.open());
+                }
+            }
         });
-
-        reaction(
-            () => this.state.url,
-            (url) => {
-                if (url) this.loadContent(url).then(() => this.open());
-            },
-        );
 
         reaction(
             () => this.state.isOpen,
@@ -133,7 +140,7 @@ class Modal extends BaseComponent {
                     document.querySelector('.modal').focus();
                 } else {
                     document.body.classList.remove('modal-open');
-                    this.state.url = '';
+                    this.state.content = '';
                 }
             },
         );

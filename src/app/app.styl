@@ -1,6 +1,12 @@
-@import "styles/config.styl" // import settings/* (rupture, mixins), variable and mixins for this project
+@import "../components/grid/grid.css"
+
+@import "styles/config.styl"
 // @import "../sprites/svg-size.styl"
 
 // basic styles
-@import "../components/grid/grid.styl"
-@import "../components/modal/modal.styl"
+@require "styles/base/base.styl"
+@require "styles/base/button.styl"
+
+@require "../components/modal/modal.styl"
+@require "../components/forms/forms.styl"
+@require "../components/typography/typography.styl"

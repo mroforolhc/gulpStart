@@ -3,6 +3,6 @@ const $ = require('gulp-load-plugins')();
 
 const { path } = require('../gulp_options');
 
-module.exports = () => src(path.deploy.src)
-    .pipe($.changed(path.deploy.dist))
-    .pipe(dest(path.deploy.dist));
+module.exports = () => src(path.deploy.from)
+    .pipe($.changed(path.deploy.to))
+    .pipe(dest(path.deploy.to));

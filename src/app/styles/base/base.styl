@@ -1,11 +1,19 @@
-@import "../../../node_modules/normalize.css/normalize.css"
+@require "../../../../node_modules/normalize.css/normalize.css"
+
+$color-base = {
+    font: #303030,
+    background: #F7F7F7,
+}
 
 *
+*:before
+*:after
     box-sizing border-box
 
 html, body
     position relative
-    size 100%
+    width 100%
+    min-height 100vh
     padding 0
     margin 0 auto
     min-width 320px
@@ -16,20 +24,13 @@ body
     flex-direction column
     justify-content space-between
 
-    background-color: _color.bg.base
-    color: _color.font.base
+    background-color: $color-base.background
+    color: $color-base.font
     font-family sans-serif
-    set('font-size', _font-size.body)
+    set('font-size', $font-size.body)
 
 main
     flex-grow 1
-
-p, ul, ol, table
-    margin 1em 0
-    padding 0
-
-ol, ul
-    margin-left 20px
 
 img
     width 100%

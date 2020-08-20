@@ -2,30 +2,33 @@
 body.modal-open
     overflow hidden
 
+.modal-open .overlay
+    overflow-y auto
+
 .overlay
     visibility hidden
     position fixed
     top 0
     left 0
-    right 0
-    bottom 0
-    background rgba(196,196,196,0.5)
+    size 100%
+    opacity 0
     z-index 3000
-    display flex
-    align-items center
-    justify-content center
+    transition all 0.3s
+    background rgba(196,196,196,0.5)
+    &__modal
+        min-height 100%
+        display flex
+        align-items center
+        justify-content center
 
 .modal
-    visibility hidden
     position relative
-    margin auto
-    width 100%
+    visibility hidden
+    size 100% auto
+    outline none
     max-width 672px
     background-color #FFFFFF
     box-shadow 0 0 41px rgba(#000, 0.5)
-    transition opacity 0.5s
-    opacity 0
-    outline none
 
     &__close
         z-index 100
@@ -36,13 +39,17 @@ body.modal-open
         +above(sm)
             mx-cross(#E5E5E5, 2px, 34px)
     &__container
-        padding 20px 30px 50px
+        padding 40px 30px
         +above(sm)
-            padding 80px 50px 100px
+            padding 80px 50px
+
+    &__title
+        font-size 30px
+        margin-bottom 30px
 
 // animation
 .overlay_show.overlay
     visibility visible
+    opacity 1
     .modal
-        opacity 1
         visibility visible
