@@ -1,6 +1,6 @@
 const Validator = {
     isNotEmpty(value) {
-        return value ? undefined : 'Required';
+        return value ? undefined : main.polyglot.t('required');
     },
 
     isNumber(value) {

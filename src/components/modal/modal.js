@@ -1,7 +1,7 @@
-import {observable, reaction} from 'mobx';
+import { observable, reaction } from 'mobx';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {observer} from 'mobx-react';
+import { observer } from 'mobx-react';
 import BaseComponent from '../baseComponent/baseComponent';
 
 const ESC_KEY = 27;
@@ -123,7 +123,7 @@ class Modal extends BaseComponent {
 
                 if (form) {
                     this.state.isComponent = true;
-                    this.state.content = formComponent.render(modalName);
+                    this.state.content = form.render();
                     this.open();
                 } else {
                     this.state.isComponent = false;

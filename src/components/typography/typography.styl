@@ -1,3 +1,27 @@
+$fonts = {
+    body: {
+        name: 'Open Sans',
+    },
+    rouble: {
+        name: 'PT Rouble Sans',
+        options: ({
+            path: 'PTRoubleSans/PTRoubleSans',
+            weight: 400,
+            style: normal
+        })
+    },
+    header: {
+        name: 'Open Sans',
+    },
+}
+
+$font-size = {
+    body: 14px n n n 16px n,
+    h1: 23px 47px n n 62px n,
+    h2: 21px 30px n n 46px n,
+    other-headers: 16px n n n 18px n,
+}
+
 for key, font in $fonts
     _name = font[name]
 
@@ -23,3 +47,5 @@ for key, font in $fonts
     set('font-size', $font-size.h2)
 .h3, .h4, .h5, .h6
     set('font-size', $font-size.other-headers)
+body
+    set('font-size', $font-size.body)

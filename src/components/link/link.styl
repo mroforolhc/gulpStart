@@ -1,0 +1,32 @@
+$color-link = {
+    default: {
+        font: #fff,
+        background: rgb(212,75,56),
+    },
+    hover: {
+        font: #fff,
+        background: rgb(232,95,76),
+    },
+    active: {
+        font: #fff,
+        background: rgb(152,15,0),
+    },
+    disabled: {
+        font: #D6D6D6,
+        background: #B9B9B9,
+    },
+}
+
+a
+    cursor pointer
+    text-decoration none
+
+.link
+    cursor pointer
+    color: $color-link.link.default
+    &:hover
+        color: $color-link.link.hover
+    &:active
+        color: $color-link.link.active
+    &[disabled]
+        color: $color-link.link.active

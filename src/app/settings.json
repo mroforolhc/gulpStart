@@ -12,5 +12,9 @@
     "lg": {"size": 1280, "maxWidth": 1220, "gutter": 30},
     "xl": {"size": 1600, "maxWidth": 1540, "gutter": 40},
     "ml": {"size": 1920, "maxWidth": 1840, "gutter": 50}
+  },
+  "phrases": {
+    "send": "Отправить",
+    "required": "Обязательно для заполнения"
   }
 }

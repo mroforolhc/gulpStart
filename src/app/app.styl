@@ -1,12 +1,14 @@
-@import "../components/grid/grid.css"
+// configuration
+@import "styles/mixins.styl"
 
-@import "styles/config.styl"
-// @import "../sprites/svg-size.styl"
+// grid
+@require "../components/grid/grid.css"
 
 // basic styles
-@require "styles/base/base.styl"
-@require "styles/base/button.styl"
+@require "styles/base.styl"
 
+// components
+@require "../components/buttons/buttons.styl"
 @require "../components/modal/modal.styl"
 @require "../components/forms/forms.styl"
 @require "../components/typography/typography.styl"

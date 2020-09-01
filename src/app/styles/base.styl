@@ -1,4 +1,4 @@
-@require "../../../../node_modules/normalize.css/normalize.css"
+@require "../../../node_modules/normalize.css/normalize.css"
 
 $color-base = {
     font: #303030,
@@ -27,7 +27,6 @@ body
     background-color: $color-base.background
     color: $color-base.font
     font-family sans-serif
-    set('font-size', $font-size.body)
 
 main
     flex-grow 1
@@ -42,3 +41,21 @@ img
 
 .reverse
     transform rotate(180deg)
+
+table
+    border-collapse collapse
+    width 100%
+    th
+        padding-y 5px
+    td
+        padding-y 15px
+        padding-right 10px
+    thead
+        border-bottom 5px solid black
+        text-align left
+    tbody
+        border-bottom 1px solid black
+        tr
+            border-bottom 1px solid #D4D4D4
+            &:last-child
+                border-bottom 1px solid black

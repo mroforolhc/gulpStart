@@ -1,3 +1,4 @@
+// ----------------- rupture --------------- //
 @require '../../../node_modules/rupture/rupture/index.styl'
 
 $jsonSettings = json('../settings.json', { hash: true })
@@ -17,6 +18,9 @@ shift(rupture.scale)
 shift(rupture.scale-names)
 
 // --------------------------------------- //
+
+$img-path = '../images/'
+$font-path = '../fonts/'
 
 mx-sqrt($x)
     return math($x, 'sqrt')

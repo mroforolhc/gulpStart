@@ -1,57 +1,27 @@
-import React from 'react';
-import { Form } from 'react-final-form';
+import CustomForm from './form';
 import BaseComponent from '../baseComponent/baseComponent';
-import AskForm from './ask-form';
-import CallbackForm from './callback-form';
+import AskForm from './components/ask-form';
+import CallbackForm from './components/callback-form';
 
-class FormState {
+class FormsState {
     forms = [];
 }
 
-const formState = new FormState();
+const formsState = new FormsState();
 
 class Forms extends BaseComponent {
     constructor(name) {
         super(name);
-        this.state = formState;
+        this.state = formsState;
     }
 
     init() {
-        this.state.forms.push({ name: 'ask', data: { title: 'Задать вопрос', component: AskForm, url: '/ask' } });
-        this.state.forms.push({ name: 'callback', data: { title: 'Вам позвонить?', component: CallbackForm, url: '/callback' } });
+        this.state.forms.push(new CustomForm('ask', AskForm));
+        this.state.forms.push(new CustomForm('callback', CallbackForm));
     }
 
     getForm(name) {
-        const result = this.state.forms.find((form) => form.name === name);
-        if (!result) return undefined;
-
-        return result.data;
-    }
-
-    render(name) {
-        const form = this.getForm(name);
-        const Component = form.component;
-        const onSubmit = async (...props) => Forms.submit(form.url, props);
-
-        return (
-            <>
-                {
-                    form.title
-                    && <div className="modal__title">{ form.title }</div>
-                }
-
-                <Form component={Component} onSubmit={onSubmit} />
-            </>
-        );
-    }
-
-    static async submit(url, props) {
-        const value = props[0];
-        const callback = props[2];
-
-        const response = await fetch(url);
-        console.log(response);
-        console.log(callback());
+        return this.state.forms.find((form) => form.getName() === name);
     }
 }
 

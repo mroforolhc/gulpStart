@@ -1,11 +1,9 @@
 import LazyLoad from 'vanilla-lazyload';
 import svg4everybody from 'svg4everybody';
 import preloadCSS from '@dotsunited/load-css-polyfill';
-
-import React from 'react';
-import ReactDOM from 'react-dom';
-
 import { observable, reaction } from 'mobx';
+import Polyglot from 'node-polyglot';
+
 import jsonSettings from './settings.json';
 import Manager from '../components/manager/manager';
 import Grid from '../components/grid/grid';
@@ -26,6 +24,19 @@ class App {
             new Forms('forms'),
             new Modal('modal'),
         );
+
+        this.lazyLoader = new LazyLoad({
+            class_loading: 'lazy-loading',
+            class_loaded: 'lazy-loaded',
+            class_error: 'lazy-error',
+            class_initial: 'lazy-initial',
+            elements_selector: '.lazy',
+        });
+
+        this.polyglot = new Polyglot({
+            locale: 'ru-RU',
+            phrases: this.settings.phrases,
+        });
     }
 
     start() {
@@ -33,6 +44,9 @@ class App {
         this.isLoadPage = true;
     }
 }
+
+svg4everybody();
+preloadCSS();
 
 const main = new App(jsonSettings);
 global.main = main;

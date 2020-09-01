@@ -3,6 +3,7 @@ const { src, dest } = require('gulp');
 const $ = require('gulp-load-plugins')();
 const named = require('vinyl-named');
 
+// const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 // const { webpack } = webpackStream;
 
 const { path, isProduction } = require('../gulp_options');
@@ -58,6 +59,16 @@ const options = {
                 },
             },
         },
+    },
+    plugins: [
+        // new BundleAnalyzerPlugin({
+        //     generateStatsFile: true,
+        //     openAnalyzer: false,
+        //     analyzerMode: 'disabled',
+        // }),
+    ],
+    performance: {
+        maxEntrypointSize: 300000,
     },
 };
 

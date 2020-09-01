@@ -1,9 +1,9 @@
 import React from 'react';
 import { Field } from 'react-final-form';
 
-import Validator from './validator';
+import Validator from '../utilities/validator';
 
-const AskForm = (props) => {
+const AskFormComponent = (props) => {
     const { handleSubmit, submitting } = props;
     return (
         <form onSubmit={handleSubmit}>
@@ -60,6 +60,24 @@ const AskForm = (props) => {
             </button>
         </form>
     );
+};
+
+const AskForm = {
+    url: '',
+
+    beforeSubmit: (form) => {
+        console.log(form);
+    },
+
+    afterSubmitSucceeded: (form) => {
+        console.log(form);
+    },
+
+    afterSubmitFailed: (form) => {
+        console.log(form);
+    },
+
+    component: AskFormComponent,
 };
 
 export default AskForm;
